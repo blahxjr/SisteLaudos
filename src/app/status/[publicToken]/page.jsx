@@ -166,8 +166,39 @@ export default async function PublicStatusPage({ params }) {
   ]);
   const lang = publicLang(settings?.value || {});
   const phone = settings?.value?.phone || "";
-  const text = lang === "es"
-    ? {
+  let text;
+  if (lang === "pt") {
+    text = {
+      title: "Estado da reparação",
+      notFoundTitle: "Código não disponível",
+      notFound: "Não encontramos esta reparação. Contacte a loja e forneça o número do ticket.",
+      ticket: "Ticket Nº",
+      client: "Cliente",
+      device: "Dispositivo",
+      issue: "Incidente",
+      items: "Produtos / serviços",
+      qty: "Qtd.",
+      price: "Preço",
+      subtotal: "Subtotal",
+      updatedAt: "Última atualização",
+      due: "Pendente",
+      technician: "Técnico",
+      contact: "Contacto",
+      status: "Estado",
+      noIssue: "Sem descrição de reparação",
+      frontPhoto: "Foto frontal",
+      backPhoto: "Foto traseira",
+      progress: "Progresso",
+      defaultHint: "A sua reparação está registada. A loja atualizará o estado quando houver novidades.",
+      waitingHint: "O equipamento está em fila de verificação ou pendente de início.",
+      repairingHint: "O técnico está a trabalhar no equipamento.",
+      readyHint: "A reparação está concluída. Pode contactar a loja para recolher o equipamento.",
+      deliveredHint: "O equipamento já foi entregue.",
+      closedHint: "A encomenda está cancelada. Contacte a loja para mais informações.",
+      contactHint: "Para qualquer dúvida, indique o número do ticket."
+    };
+  } else if (lang === "es") {
+    text = {
       title: "Estado de reparación",
       notFoundTitle: "Código no disponible",
       notFound: "No hemos encontrado esta reparación. Contacta con la tienda y facilita el número del ticket.",
@@ -195,8 +226,9 @@ export default async function PublicStatusPage({ params }) {
       deliveredHint: "El equipo ya figura como entregado.",
       closedHint: "La orden está cancelada. Contacta con la tienda si necesitas más información.",
       contactHint: "Para cualquier consulta, indica el número de ticket."
-    }
-    : {
+    };
+  } else {
+    text = {
       title: "维修进度",
       notFoundTitle: "二维码不可用",
       notFound: "没有找到这张维修单。请联系店铺，并提供纸质单据上的单号。",
@@ -225,6 +257,7 @@ export default async function PublicStatusPage({ params }) {
       closedHint: "订单已取消。如需继续咨询，请联系店铺。",
       contactHint: "如需咨询，请联系店铺并提供维修单号。"
     };
+  }
 
   if (!repair) {
     return (

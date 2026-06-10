@@ -1,0 +1,169 @@
+{
+  "app": {
+    "title": "RepairNote",
+    "description": "Sistema de gestão de reparos"
+  },
+  "auth": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "username": "Usuário",
+    "password": "Senha",
+    "invalid": "Usuário ou senha incorretos",
+    "rememberMe": "Lembrar-me",
+    "forgotPassword": "Esqueceu a senha?"
+  },
+  "menu": {
+    "dashboard": "Painel",
+    "repairs": "Reparos",
+    "clients": "Clientes",
+    "catalog": "Catálogo",
+    "reports": "Relatórios",
+    "settings": "Configurações",
+    "staff": "Equipe",
+    "technicians": "Técnicos",
+    "backup": "Backup",
+    "import": "Importar",
+    "export": "Exportar"
+  },
+  "buttons": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "create": "Criar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "search": "Buscar",
+    "download": "Baixar",
+    "upload": "Enviar",
+    "restore": "Restaurar",
+    "confirm": "Confirmar"
+  },
+  "labels": {
+    "id": "ID",
+    "name": "Nome",
+    "phone": "Telefone",
+    "email": "E-mail",
+    "address": "Endereço",
+    "createdAt": "Criado em",
+    "updatedAt": "Atualizado em",
+    "status": "Status",
+    "quantity": "Quantidade",
+    "price": "Preço",
+    "total": "Total",
+    "notes": "Observações",
+    "serial": "Número de série",
+    "model": "Modelo",
+    "brand": "Marca",
+    "service": "Serviço",
+    "warranty": "Garantia"
+  },
+  "repairs": {
+    "title": "Reparos",
+    "new": "Novo reparo",
+    "searchPlaceholder": "Buscar por ticket, cliente ou telefone",
+    "ticket": "Ticket Nº",
+    "client": "Cliente",
+    "device": "Dispositivo",
+    "issue": "Problema",
+    "items": "Itens / serviços",
+    "qty": "Qtd.",
+    "subtotal": "Subtotal",
+    "estimated": "Estimado",
+    "paid": "Pago",
+    "balance": "Saldo",
+    "technician": "Técnico",
+    "priority": "Prioridade",
+    "pickupAt": "Retirada em",
+    "closed": "Fechado",
+    "delivered": "Entregue",
+    "inProgress": "Em andamento",
+    "waiting": "Aguardando"
+  },
+  "clients": {
+    "title": "Clientes",
+    "new": "Novo cliente",
+    "searchPlaceholder": "Buscar por nome ou telefone"
+  },
+  "reports": {
+    "title": "Relatórios",
+    "overview": "Visão geral",
+    "sales": "Vendas",
+    "repairs": "Reparos"
+  },
+  "backup": {
+    "create": "Criar backup",
+    "download": "Baixar backup",
+    "import": "Importar backup",
+    "restore": "Restaurar backup",
+    "list": "Lista de backups"
+  },
+  "settings": {
+    "title": "Configurações",
+    "general": "Geral",
+    "localization": "Localização",
+    "language": "Idioma",
+    "saveSuccess": "Configurações salvas com sucesso"
+  },
+  "staff": {
+    "title": "Equipe",
+    "username": "Nome de usuário",
+    "role": "Função",
+    "isAdmin": "Administrador",
+    "password": "Senha"
+  },
+  "technicians": {
+    "title": "Técnicos"
+  },
+  "search": {
+    "noResults": "Nenhum resultado encontrado",
+    "placeholder": "Digite para buscar"
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Próximo"
+  },
+  "messages": {
+    "saved": "Salvo com sucesso",
+    "deleted": "Excluído",
+    "confirmDelete": "Tem certeza que deseja excluir?",
+    "error": "Ocorreu um erro",
+    "notFound": "Não encontrado"
+  },
+  "status": {
+    "title": "Status da reparação",
+    "notFoundTitle": "Código não disponível",
+    "notFound": "Não encontramos esta reparação. Contate a loja e forneça o número do ticket.",
+    "ticket": "Ticket Nº",
+    "client": "Cliente",
+    "device": "Dispositivo",
+    "issue": "Descrição do problema",
+    "items": "Produtos / serviços",
+    "qty": "Qtd.",
+    "price": "Preço",
+    "subtotal": "Subtotal",
+    "updatedAt": "Última atualização",
+    "due": "Pendente",
+    "technician": "Técnico",
+    "contact": "Contato",
+    "state": "Estado",
+    "noIssue": "Sem descrição de reparação",
+    "frontPhoto": "Foto frontal",
+    "backPhoto": "Foto traseira",
+    "progress": "Progresso",
+    "defaultHint": "Sua reparação está registrada. A loja atualizará o estado quando houver novidades.",
+    "waitingHint": "O equipamento está em fila de verificação ou pendente de início.",
+    "repairingHint": "O técnico está trabalhando no equipamento.",
+    "readyHint": "A reparação está concluída. Você pode contatar a loja para recolher o equipamento.",
+    "deliveredHint": "O equipamento já foi entregue.",
+    "closedHint": "O pedido está fechado ou cancelado. Contate a loja para mais informações.",
+    "contactHint": "Para dúvidas, informe o número do ticket ao entrar em contato."
+  },
+  "validation": {
+    "required": "Campo obrigatório",
+    "invalidEmail": "E-mail inválido",
+    "minLength": "Mínimo de caracteres não atendido"
+  },
+  "ui": {
+    "loading": "Carregando...",
+    "noData": "Sem dados"
+  }
+}

@@ -127,8 +127,10 @@ const APP_DISPLAY_NAME = "repuestomovil";
 const technicianColorOptions = ["#16a34a", "#2563eb", "#dc2626", "#9333ea", "#ea580c", "#0f766e", "#111827"];
 const languages = [
   { value: "zh", label: "中文" },
-  { value: "es", label: "Español" }
+  { value: "es", label: "Español" },
+  { value: "pt", label: "Português" }
 ];
+
 
 const serviceZhMap = {
   "OFERTA BLACK FRIDAY 2025": "黑五优惠 2025",
@@ -1274,6 +1276,9 @@ const uiText = {
     progress: "Seguimiento"
   }
 };
+
+// Inicialmente reutiliza traduções em espanhol para pt como fallback (pode ser substituído por pt completos)
+uiText.pt = uiText.es;
 
 function getLang(settings) {
   return settings?.uiLanguage || settings?.printLanguage || "zh";

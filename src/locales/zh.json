@@ -1,0 +1,38 @@
+{
+  "app.title": "repuestomovil",
+  "app.description": "维修开单管理系统",
+  "status": {
+    "title": "维修进度",
+    "notFoundTitle": "二维码不可用",
+    "notFound": "没有找到这张维修单。请联系店铺，并提供纸质单据上的单号。",
+    "ticket": "单号",
+    "client": "客户",
+    "device": "设备",
+    "issue": "维修内容",
+    "items": "商品 / 服务",
+    "qty": "数量",
+    "price": "价格",
+    "subtotal": "小计",
+    "updatedAt": "更新时间",
+    "due": "待收款",
+    "technician": "维修师",
+    "contact": "联系方式",
+    "status": "状态",
+    "noIssue": "暂无维修内容",
+    "frontPhoto": "正面照片",
+    "backPhoto": "背面照片",
+    "progress": "维修进度",
+    "defaultHint": "维修单已登记，店铺会在有进展时更新状态。",
+    "waitingHint": "设备正在排队检测或等待开始维修。",
+    "repairingHint": "维修师正在处理这台设备。",
+    "readyHint": "维修已完成，可以联系店铺确认取机。",
+    "deliveredHint": "设备已标记为客户取走。",
+    "closedHint": "订单已取消。如需继续咨询，请联系店铺。",
+    "contactHint": "如需咨询，请联系店铺并提供维修单号。"
+  },
+  "login": {
+    "username": "用户",
+    "password": "密码",
+    "invalid": "账号或密码不正确"
+  }
+}
