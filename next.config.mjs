@@ -9,6 +9,10 @@ const securityHeaders = [
 
 const nextConfig = {
   allowedDevOrigins: ["192.168.1.64"],
+  i18n: {
+    locales: ["pt-BR", "en"],
+    defaultLocale: "pt-BR"
+  },
   async headers() {
     return [
       {

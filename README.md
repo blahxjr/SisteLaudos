@@ -1,5 +1,7 @@
 # RepairNOTE
 
+Bem-vindo ao RepairNOTE — nesta fase o repositório foi preparado para iniciar o desenvolvimento assistido por agentes de IA com memória persistente. O idioma principal do projeto foi definido como Português do Brasil (pt-BR). O objetivo desta etapa é estruturar a base documental, de memória e de governança para permitir trabalho colaborativo e assistido por IA, mantendo regras de segurança, auditabilidade e ciclo incremental.
+
 RepairNOTE is a repair shop management system for creating repair tickets, managing clients, catalog data, technicians, reports, customer-facing status pages, and database backups.
 
 The current codebase is a Next.js + MySQL/MariaDB application. It is intended for small repair shops that need a practical internal tool rather than a marketing site.

@@ -27,6 +27,7 @@
     "plesk:setup": "node scripts/plesk-setup.mjs",
     "plesk:pack": "node scripts/package-plesk.mjs",
     "plesk:start": "node server.js"
+    ,"agents:bootstrap": "node agents/bootstrap.js"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

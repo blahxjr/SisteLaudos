@@ -30,3 +30,4 @@ prisma/*.db-journal
 *.zip
 backups/
 exports/
+data/agent-memory/
