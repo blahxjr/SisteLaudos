@@ -31,7 +31,8 @@ jobs:
           # Ensure Prisma client is available for build (pin to project Prisma CLI)
           npx prisma@6.19.3 generate || true
           # Use npx to run Next directly to avoid missing local bin in some runner states
-          npx next build
+          # Disable Turbopack to avoid root-resolution issues in CI runners
+          npx next build --turbo=false
       - name: Validate docs presence
         run: |
           test -f docs/vision-system.md && echo "vision ok" || (echo "missing vision" && exit 1)
