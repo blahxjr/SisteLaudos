@@ -53,6 +53,14 @@ jobs:
           else
             echo "All critical modules present"
           fi
+        - name: Ensure runtime deps explicitly
+          run: |
+            echo "Installing explicit runtime deps: react react-dom and UI libs"
+            npm install react react-dom clsx lucide-react @radix-ui/react-dialog @zxing/browser @prisma/client --no-audit --no-fund --legacy-peer-deps || true
+            npm rebuild || true
+            echo 'Final installed packages:'
+            ls -la node_modules | sed -n '1,200p' || true
+            npm ls --depth=0 || true
       - name: Lint / Build
         run: |
           npm run lint
