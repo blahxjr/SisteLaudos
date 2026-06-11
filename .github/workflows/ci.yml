@@ -22,17 +22,15 @@ jobs:
           npm rebuild || true
           # Ensure runtime UI/runtime deps present (no-save to avoid lock churn)
           npm install react react-dom clsx lucide-react @radix-ui/react-dialog @zxing/browser @prisma/client --no-audit --no-fund --no-save --legacy-peer-deps || true
-          # Ensure Prisma client generated for build
-          npx prisma generate || true
+          # Do not generate Prisma client here; generate during build using pinned CLI
           echo 'Installed top-level packages:'
           npm ls --depth=0 || true
       - name: Lint / Build
         run: |
-          # Ensure Prisma client is available for build (pin to project Prisma CLI)
-          npx prisma@6.19.3 generate || true
+          # Ensure Prisma client is available for build (use project-installed Prisma)
+          npx prisma generate || true
           # Use npx to run Next directly to avoid missing local bin in some runner states
-          # Disable Turbopack to avoid root-resolution issues in CI runners
-          npx next build --turbo=false
+          npx next build
       - name: Validate docs presence
         run: |
           test -f docs/vision-system.md && echo "vision ok" || (echo "missing vision" && exit 1)
