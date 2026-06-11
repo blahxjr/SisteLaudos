@@ -6,6 +6,20 @@ RepairNOTE is a repair shop management system for creating repair tickets, manag
 
 Fase atual: estruturação da base para desenvolvimento com agentes de IA e memória persistente. Veja `docs/vision-system.md`, `docs/inventory.md` e `docs/agents/` para detalhes e templates.
 
+Como iniciar a infra de memória (desenvolvimento)
+
+1. Subir Postgres com suporte a vetores (dev):
+
+```bash
+docker compose -f docker-compose.dev.yml up -d
+```
+
+2. Definir `DATABASE_URL` (ex.: `postgres://repairnote:repairnote@localhost:5432/repairnote`).
+
+3. Usar `src/lib/agent-memory-pg.js` para persistência local via Postgres.
+
+Observação: essa infraestrutura é para desenvolvimento; em produção siga políticas e ADRs antes de migrar.
+
 The current codebase is a Next.js + MySQL/MariaDB application. It is intended for small repair shops that need a practical internal tool rather than a marketing site.
 
 ## Features

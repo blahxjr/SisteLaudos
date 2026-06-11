@@ -1,0 +1,26 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint / Build
+        run: |
+          npm run lint
+          npm run build
+      - name: Validate docs presence
+        run: |
+          test -f docs/vision-system.md && echo "vision ok" || (echo "missing vision" && exit 1)
+          test -f docs/agents/agent-charter.md || (echo "missing agent-charter" && exit 1)
+          test -f docs/qa/definition-of-done.md || (echo "missing DoD" && exit 1)
+      - name: Smoke (no tests configured)
+        run: echo "No unit tests configured; ensure DoD and ADRs are present"
