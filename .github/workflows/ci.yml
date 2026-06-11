@@ -5,6 +5,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node
@@ -22,5 +24,11 @@ jobs:
           test -f docs/vision-system.md && echo "vision ok" || (echo "missing vision" && exit 1)
           test -f docs/agents/agent-charter.md || (echo "missing agent-charter" && exit 1)
           test -f docs/qa/definition-of-done.md || (echo "missing DoD" && exit 1)
+      - name: Validate governance
+        run: |
+          test -d adr || (echo "missing adr directory" && exit 1)
+          COUNT=$(ls -1 adr 2>/dev/null | wc -l)
+          if [ "$COUNT" -lt 1 ]; then echo "no ADR files found" && exit 1; fi
+          test -f docker/initdb/01_init.sql || (echo "missing init SQL for dev DB" && exit 1)
       - name: Smoke (no tests configured)
         run: echo "No unit tests configured; ensure DoD and ADRs are present"
