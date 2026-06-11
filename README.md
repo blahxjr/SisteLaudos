@@ -4,6 +4,8 @@ Bem-vindo ao RepairNOTE — nesta fase o repositório foi preparado para iniciar
 
 RepairNOTE is a repair shop management system for creating repair tickets, managing clients, catalog data, technicians, reports, customer-facing status pages, and database backups.
 
+Fase atual: estruturação da base para desenvolvimento com agentes de IA e memória persistente. Veja `docs/vision-system.md`, `docs/inventory.md` e `docs/agents/` para detalhes e templates.
+
 The current codebase is a Next.js + MySQL/MariaDB application. It is intended for small repair shops that need a practical internal tool rather than a marketing site.
 
 ## Features

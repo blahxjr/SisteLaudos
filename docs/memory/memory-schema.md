@@ -14,3 +14,30 @@ Implementação recomendada para produção:
 - Serviço de embeddings + índice vetorial (ex.: Milvus, Pinecone, Weaviate ou PG + pgvector) para busca semântica.
 
 Para início rápido no desenvolvimento local, há um módulo file-based em `src/lib/agent-memory.js` que armazena registros JSON em `data/agent-memory/`.
+
+Exemplo de uso (salvando um registro):
+
+```js
+const mem = require('../../src/lib/agent-memory');
+(async () => {
+	const rec = await mem.saveRecord({ type: 'task_record', title: 'mapear repairs', body: 'evidências...' });
+	console.log(rec.id);
+})();
+```
+
+Modelo de tabela recomendado (Postgres) — esboço SQL:
+
+```sql
+CREATE TABLE memory_record (
+	id uuid PRIMARY KEY,
+	type text,
+	title text,
+	body jsonb,
+	tags text[],
+	source text,
+	confidence numeric,
+	created_at timestamptz DEFAULT now()
+);
+```
+
+Observação: cada mudança importante de política ou arquitetura deve gerar um `decision_record` referenciando o ADR correspondente.
