@@ -13,54 +13,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Install dependencies (robust)
+      - name: Install dependencies (deterministic)
         run: |
           set -e
-          # try clean ci first; if it fails, fall back to full install
-          npm ci --prefer-offline=false --no-audit --no-fund || npm install --no-audit --no-fund --unsafe-perm
-          # ensure native builds and binaries are ready
+          rm -rf node_modules
+          # Prefer clean ci; fallback to install with legacy-peer-deps for reproducibility
+          npm ci --prefer-offline=false --no-audit --no-fund || npm install --no-audit --no-fund --legacy-peer-deps
           npm rebuild || true
-      - name: Debug node bins
-        run: |
-          ls -la node_modules/.bin || true
-          echo 'Installed packages:'
+          # Ensure runtime UI/runtime deps present (no-save to avoid lock churn)
+          npm install react react-dom clsx lucide-react @radix-ui/react-dialog @zxing/browser @prisma/client --no-audit --no-fund --no-save --legacy-peer-deps || true
+          # Ensure Prisma client generated for build
+          npx prisma generate || true
+          echo 'Installed top-level packages:'
           npm ls --depth=0 || true
-      - name: Ensure Next is installed (idempotent)
-        run: |
-          npm install next --no-audit --no-fund || true
-      - name: Debug next install
-        run: ls -la node_modules/next || true
-      - name: Ensure core deps present (fallback)
-        run: |
-          # If a representative frontend dep is missing, force a full install
-          if [ ! -d "node_modules/clsx" ]; then
-            echo "core deps missing; running npm install --force"
-            npm install --no-audit --no-fund --force
-          else
-            echo "core deps present"
-          fi
-      - name: Aggressive fallback if critical modules still missing
-        run: |
-          MISSING=0
-          for P in @prisma/client clsx lucide-react @radix-ui/react-dialog @zxing/browser; do
-            node -e "try{require('./node_modules/'+process.argv[1]);}catch(e){process.exit(1)}" "$P" 2>/dev/null || MISSING=1
-          done
-          if [ "$MISSING" -eq 1 ]; then
-            echo "Some critical modules missing; doing aggressive reinstall"
-            rm -rf node_modules package-lock.json
-            npm install --no-audit --no-fund --legacy-peer-deps
-            npm rebuild || true
-          else
-            echo "All critical modules present"
-          fi
-        - name: Ensure runtime deps explicitly
-          run: |
-            echo "Installing explicit runtime deps: react react-dom and UI libs"
-            npm install react react-dom clsx lucide-react @radix-ui/react-dialog @zxing/browser @prisma/client --no-audit --no-fund --legacy-peer-deps || true
-            npm rebuild || true
-            echo 'Final installed packages:'
-            ls -la node_modules | sed -n '1,200p' || true
-            npm ls --depth=0 || true
       - name: Lint / Build
         run: |
           npm run lint
