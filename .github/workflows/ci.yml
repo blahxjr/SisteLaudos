@@ -30,6 +30,15 @@ jobs:
           npm install next --no-audit --no-fund || true
       - name: Debug next install
         run: ls -la node_modules/next || true
+      - name: Ensure core deps present (fallback)
+        run: |
+          # If a representative frontend dep is missing, force a full install
+          if [ ! -d "node_modules/clsx" ]; then
+            echo "core deps missing; running npm install --force"
+            npm install --no-audit --no-fund --force
+          else
+            echo "core deps present"
+          fi
       - name: Lint / Build
         run: |
           npm run lint
