@@ -26,8 +26,9 @@
     "mysql:setup": "node scripts/mysql-setup.mjs",
     "plesk:setup": "node scripts/plesk-setup.mjs",
     "plesk:pack": "node scripts/package-plesk.mjs",
-    "plesk:start": "node server.js"
-    ,"agents:bootstrap": "node agents/bootstrap.js"
+    "plesk:start": "node server.js",
+    "agents:bootstrap": "node agents/bootstrap.js",
+    "migrate:memory": "node scripts/migrate-memory-to-pg.js"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
@@ -37,7 +38,8 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.555.0",
     "next": "^16.2.6",
-    "prisma": "^6.19.3",
+    "pg": "^8.10.0",
+    
     "qrcode": "^1.5.4",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
@@ -45,10 +47,8 @@
   },
   "devDependencies": {
     "playwright": "^1.59.1",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "pg": "^8.10.0"
+    "typescript": "^5.9.3",
+    "prisma": "6.19.3"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
