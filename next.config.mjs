@@ -9,6 +9,10 @@ const securityHeaders = [
 
 const nextConfig = {
   allowedDevOrigins: ["192.168.1.64"],
+  // Ensure Turbopack resolves project root correctly in CI runners
+  turbopack: {
+    root: '.'
+  },
   i18n: {
     locales: ["pt-BR", "en"],
     defaultLocale: "pt-BR"
