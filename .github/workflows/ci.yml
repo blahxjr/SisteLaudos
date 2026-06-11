@@ -14,7 +14,10 @@ jobs:
         with:
           node-version: '24'
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci || npm install --no-audit --no-fund
+      - name: Debug node bins
+        run: ls -la node_modules/.bin || true
       - name: Lint / Build
         run: |
           npm run lint
