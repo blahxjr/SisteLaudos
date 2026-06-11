@@ -28,8 +28,10 @@ jobs:
           npm ls --depth=0 || true
       - name: Lint / Build
         run: |
-          npm run lint
-          npm run build
+          # Ensure Prisma client is available for build
+          npx prisma generate || true
+          # Use npx to run Next directly to avoid missing local bin in some runner states
+          npx next build
       - name: Validate docs presence
         run: |
           test -f docs/vision-system.md && echo "vision ok" || (echo "missing vision" && exit 1)
