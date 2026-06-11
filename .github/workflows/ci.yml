@@ -39,6 +39,20 @@ jobs:
           else
             echo "core deps present"
           fi
+      - name: Aggressive fallback if critical modules still missing
+        run: |
+          MISSING=0
+          for P in @prisma/client clsx lucide-react @radix-ui/react-dialog @zxing/browser; do
+            node -e "try{require('./node_modules/'+process.argv[1]);}catch(e){process.exit(1)}" "$P" 2>/dev/null || MISSING=1
+          done
+          if [ "$MISSING" -eq 1 ]; then
+            echo "Some critical modules missing; doing aggressive reinstall"
+            rm -rf node_modules package-lock.json
+            npm install --no-audit --no-fund --legacy-peer-deps
+            npm rebuild || true
+          else
+            echo "All critical modules present"
+          fi
       - name: Lint / Build
         run: |
           npm run lint
