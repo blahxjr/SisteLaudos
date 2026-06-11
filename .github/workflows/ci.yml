@@ -13,13 +13,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Install dependencies
+      - name: Install dependencies (robust)
         run: |
-          npm ci || npm install --no-audit --no-fund
+          set -e
+          # try clean ci first; if it fails, fall back to full install
+          npm ci --prefer-offline=false --no-audit --no-fund || npm install --no-audit --no-fund --unsafe-perm
+          # ensure native builds and binaries are ready
+          npm rebuild || true
       - name: Debug node bins
-        run: ls -la node_modules/.bin || true
-      - name: Ensure Next is installed
-        run: npm install next --no-audit --no-fund
+        run: |
+          ls -la node_modules/.bin || true
+          echo 'Installed packages:'
+          npm ls --depth=0 || true
+      - name: Ensure Next is installed (idempotent)
+        run: |
+          npm install next --no-audit --no-fund || true
       - name: Debug next install
         run: ls -la node_modules/next || true
       - name: Lint / Build
