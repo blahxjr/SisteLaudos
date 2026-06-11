@@ -18,6 +18,10 @@ jobs:
           npm ci || npm install --no-audit --no-fund
       - name: Debug node bins
         run: ls -la node_modules/.bin || true
+      - name: Ensure Next is installed
+        run: npm install next --no-audit --no-fund
+      - name: Debug next install
+        run: ls -la node_modules/next || true
       - name: Lint / Build
         run: |
           npm run lint
