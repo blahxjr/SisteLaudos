@@ -13,18 +13,38 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: 'npm'  # habilita cache nativo do actions/setup-node — mais eficiente que cache manual
+      - name: Check Node version
+        run: |
+          set -e
+          NODE_VER=$(node --version 2>/dev/null || true)
+          if [ -z "$NODE_VER" ]; then
+            echo "Node version must be >= 24. Found: none"
+            exit 1
+          fi
+          # Strip leading 'v' if present
+          NV=${NODE_VER#v}
+          MAJOR=$(printf "%s" "$NV" | cut -d. -f1)
+          # If MAJOR is not a number, fail
+          if ! printf "%s" "$MAJOR" | grep -Eq '^[0-9]+$'; then
+            echo "Node version must be >= 24. Found: $NV"
+            exit 1
+          fi
+          if [ "$MAJOR" -lt 24 ]; then
+            echo "Node version must be >= 24. Found: $NV"
+            exit 1
+          fi
+          echo "Node version OK: $NV"
       - name: Install dependencies (deterministic)
         run: |
           set -e
-          rm -rf node_modules
-          # Prefer clean ci; fallback to install with legacy-peer-deps for reproducibility
-          npm ci --prefer-offline=false --no-audit --no-fund || npm install --no-audit --no-fund --legacy-peer-deps
-          npm rebuild || true
-          # Ensure runtime UI/runtime deps present (no-save to avoid lock churn)
-          npm install react react-dom clsx lucide-react @radix-ui/react-dialog @zxing/browser @prisma/client --no-audit --no-fund --no-save --legacy-peer-deps || true
-          # Do not generate Prisma client here; generate during build using pinned CLI
-          echo 'Installed top-level packages:'
-          npm ls --depth=0 || true
+          # npm ci é a única forma correta de instalar em CI — reproduzível via lockfile
+          # Se este step falhar, é um sinal real de problema: não silenciar com fallback
+          npm ci --prefer-offline --no-audit --no-fund
+          # NÃO fazer npm install adicional pós-ci — viola o propósito do lockfile
+          # Se algum pacote está faltando, o lockfile deve ser atualizado no dev e commitado
+          echo "Installed top-level packages:"
+          npm ls --depth=0 2>/dev/null || true
       - name: Lint / Build
         run: |
           # Ensure Prisma client is available for build (use project-installed Prisma)
