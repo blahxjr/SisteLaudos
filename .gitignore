@@ -31,3 +31,4 @@ prisma/*.db-journal
 backups/
 exports/
 data/agent-memory/
+!docker/initdb/01_init.sql
